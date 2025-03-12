@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Liste des </h1>
+    {% for grandClient in grandClients %}
+        <h2>{{ grandClient.grandClient }}</h2>
+        <p>Date : {{ grandClient.mois }}</p>
+        <p>Total du montant : {{ grandClient.total_montant }} €</p>
+        <br>
+    {% endfor %}
+
+{% endblock %}

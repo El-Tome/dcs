@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Liste des applications</h1>
+    {% for appli in applis %}
+        <h2>{{ appli.grandClient }}</h2>
+        <p>Nom de l'application : {{ appli.application }}</p>
+        <br>
+    {% endfor %}
+
+{% endblock %}
