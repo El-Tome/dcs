@@ -15,12 +15,27 @@ final class HomeController extends AbstractController
         ApplicationRepository $applicationRepository
     ): Response
     {
-        $applis = $applicationRepository->getApplicationByGrandClient(10);
+        $applis = $applicationRepository->getApplicationByGrandClient();
+
+        $groupedApplis = [];
+
+        foreach ($applis as $appli) {
+            $grandClient = $appli['grandClient'];
+
+            if (!isset($groupedApplis[$grandClient])) {
+                $groupedApplis[$grandClient] = [];
+            }
+
+            $groupedApplis[$grandClient][] = [
+                'application' => $appli['application'],
+                'totalPrix' => $appli['totalPrix']
+            ];
+        }
 
         return $this->render(
             'appli.html.twig',
             [
-                'applis' => $applis,
+                'groupedApplis' => $groupedApplis,
             ]
         );
     }

@@ -2,11 +2,17 @@
 
 {% block body %}
 
-    <h1>Liste des applications</h1>
-    {% for appli in applis %}
-        <h2>{{ appli.grandClient }}</h2>
-        <p>Nom de l'application : {{ appli.application }}</p>
-        <br>
+    {% for grandClient, applications in groupedApplis %}
+        <div style="width: 100%; max-width: 1000px; height: 100%; max-height: 600px; margin: auto;">
+            <h1>{{ grandClient }}</h1>
+            <div id="chart-data-{{ loop.index }}"
+                 data-labels='{{ applications|map(a => a.application)|json_encode|raw }}'
+                 data-values='{{ applications|map(a => a.totalPrix)|json_encode|raw }}'>
+            </div>
+            <canvas id="chart-{{ loop.index }}" style="width: 100%; max-width: 1000px; height: 80%; max-height: 500px; margin: auto;"></canvas>
+        </div>
     {% endfor %}
+
+
 
 {% endblock %}
