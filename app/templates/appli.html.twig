@@ -6,6 +6,7 @@
         <div style="width: 100%; max-width: 1000px; height: 100%; max-height: 600px; margin: auto;">
             <h1>{{ grandClient }}</h1>
             <div id="chart-data-{{ loop.index }}"
+                 data-type='bar'
                  data-labels='{{ applications|map(a => a.application)|json_encode|raw }}'
                  data-values='{{ applications|map(a => a.totalPrix)|json_encode|raw }}'>
             </div>

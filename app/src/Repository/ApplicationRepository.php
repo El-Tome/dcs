@@ -66,9 +66,9 @@ class ApplicationRepository
 
         $sql2 = "
             SELECT
-                gc.NomGrandClient AS grandClient,
+                gc.NomGrandClient             AS grandClient,
                 DATE_FORMAT(lf.mois, '%Y-%m') AS mois,
-                SUM(lf.prix) AS total_montant
+                SUM(lf.prix)                  AS total_montant
             FROM ligne_facturation lf
             INNER JOIN centresactivite ca ON ca.CentreActiviteID = lf.CentreActiviteID
             INNER JOIN clients          c ON c.CentreActiviteID = ca.CentreActiviteID

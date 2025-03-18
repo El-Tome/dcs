@@ -16,15 +16,19 @@ export default class ChartManager {
             }
 
             const ctx = canvas.getContext('2d');
-            const labels = JSON.parse(dataContainer.dataset.labels || '[]');
-            const values = JSON.parse(dataContainer.dataset.values || '[]');
+
+            const type = dataContainer.dataset.type || 'bar';
+            const datasetsLabels = dataContainer.dataset.datasetsLabels || '';
+
+            const labels         = JSON.parse(dataContainer.dataset.labels         || '[]');
+            const values         = JSON.parse(dataContainer.dataset.values         || '[]');
 
             new Chart(ctx, {
-                type: 'bar',  // Change en "line", "pie", etc.
+                type: type,
                 data: {
                     labels: labels, // Noms des applications
                     datasets: [{
-                        label: 'Total des ventes (€)',
+                        label: datasetsLabels,
                         data: values, // Prix total des applications du client
                         backgroundColor: 'rgba(54, 162, 235, 0.5)',
                         borderColor: 'rgba(54, 162, 235, 1)',

@@ -2,12 +2,17 @@
 
 {% block body %}
 
-    <h1>Liste des </h1>
-    {% for grandClient in grandClients %}
-        <h2>{{ grandClient.grandClient }}</h2>
-        <p>Date : {{ grandClient.mois }}</p>
-        <p>Total du montant : {{ grandClient.total_montant }} €</p>
-        <br>
-    {% endfor %}
+    <h1>Évolution des montants par mois</h1>
 
+    {% for grandClient, data in groupedGrandClients %}
+         <div style="width: 100%; max-width: 1000px; height: 100%; max-height: 600px; margin: auto;">
+            <h1>{{ grandClient }}</h1>
+            <div id="chart-data-{{ loop.index }}"
+                 data-type='line'
+                 data-labels='{{ data|map(d => d.mois)|json_encode|raw }}'
+                 data-values='{{ data|map(d => d.total_montant)|json_encode|raw }}'>
+            </div>
+            <canvas id="chart-{{ loop.index }}" style="width: 100%; max-width: 1000px; height: 80%; max-height: 500px; margin: auto;"></canvas>
+        </div>
+    {% endfor %}
 {% endblock %}

@@ -47,10 +47,26 @@ final class HomeController extends AbstractController
     {
         $grandClients = $applicationRepository->getGrandClient(5);
 
+        $groupedGrandClients = [];
+
+        foreach ($grandClients as $appli) {
+            $grandClient = $appli['grandClient'];
+
+            if (!isset($groupedGrandClients[$grandClient])) {
+                $groupedGrandClients[$grandClient] = [];
+            }
+
+            $groupedGrandClients[$grandClient][] = [
+                'mois'          => $appli['mois'],
+                'total_montant' => $appli['total_montant']
+            ];
+        }
+
         return $this->render(
             'grandClients.html.twig',
             [
                 'grandClients' => $grandClients,
+                'groupedGrandClients' => $groupedGrandClients,
             ]
         );
     }
